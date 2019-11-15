@@ -60,6 +60,34 @@ public class Logica {
 				lista.getConejos().get(i).pintar(this.imagenConejo);
 			}
 
+			for (int i = 0; i < lista.getConejos().size() - 1; i++) {
+				float conejoX = lista.getConejos().get(i).getPosX();
+				float conejoY = lista.getConejos().get(i).getPosY();
+
+				float conejoDosX = lista.getConejos().get(i + 1).getPosX();
+				float conejoDosY = lista.getConejos().get(i + 1).getPosY();
+
+				if (PApplet.dist(conejoX, conejoY, conejoDosX, conejoDosY) < 53 && conejoX < app.width/2 && conejoY < app.height/2) {
+					lista.getConejos().get(i).setPosX(lista.getConejos().get(i).getPosX() + 50);
+					lista.getConejos().get(i).setPosY(lista.getConejos().get(i).getPosY() + 50);
+				}
+				
+				if (PApplet.dist(conejoX, conejoY, conejoDosX, conejoDosY) < 53 && conejoX > app.width/2 && conejoY > app.height/2) {
+					lista.getConejos().get(i).setPosX(lista.getConejos().get(i).getPosX() - 50);
+					lista.getConejos().get(i).setPosY(lista.getConejos().get(i).getPosY() - 50);
+				}
+				
+				if (PApplet.dist(conejoX, conejoY, conejoDosX, conejoDosY) < 53 && conejoX < app.width/2 && conejoY > app.height/2) {
+					lista.getConejos().get(i).setPosX(lista.getConejos().get(i).getPosX() + 50);
+					lista.getConejos().get(i).setPosY(lista.getConejos().get(i).getPosY() - 50);
+				}
+				
+				if (PApplet.dist(conejoX, conejoY, conejoDosX, conejoDosY) < 53 && conejoX > app.width/2 && conejoY < app.height/2) {
+					lista.getConejos().get(i).setPosX(lista.getConejos().get(i).getPosX() - 50);
+					lista.getConejos().get(i).setPosY(lista.getConejos().get(i).getPosY() + 50);
+				}
+			}
+
 			for (int i = 0; i < lista.getZorros().size(); i++) {
 				lista.getZorros().get(i).pintar(this.imagenZorro);
 			}

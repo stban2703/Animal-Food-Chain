@@ -6,15 +6,16 @@ import processing.core.PVector;
 public class Conejo extends Animal implements Runnable {
 
 	private PVector direccion;
-	private int puntoEncuentroX;
-	private int puntoEncuentroY;
+	private float puntoEncuentroX;
+	private float puntoEncuentroY;
 
 	public Conejo(String tipo, float posX, float posY, float ancho, float alto, String estado, int edad, String sexo,
 			int velocidad, boolean encuentro, PApplet app) {
 		super(tipo, posX, posY, ancho, alto, estado, edad, sexo, velocidad, encuentro, app);
+
 		new Thread(this).start();
-		this.puntoEncuentroX = app.width - 53;// (int) this.app.random(53, 947);
-		this.puntoEncuentroY = app.height - 53;// (int) this.app.random(53, 547);
+		this.puntoEncuentroX = 1;
+		this.puntoEncuentroY = 1;
 
 	}
 
@@ -30,35 +31,25 @@ public class Conejo extends Animal implements Runnable {
 	}
 
 	public void mover() {
-		//this.direccion = new PVector(this.puntoEncuentroX - this.posX, this.puntoEncuentroY - this.posY);
-		//this.direccion.normalize();
 
-		/*this.direccion = new PVector(this.puntoEncuentroX - this.posX, this.puntoEncuentroY - this.posY);
-		this.direccion.normalize();
+		try {
+			this.direccion = new PVector((app.noise(this.puntoEncuentroX) * app.width) - this.posX,
+					(app.noise(this.puntoEncuentroY) * app.height) - this.posY);
+			this.direccion.normalize();
 
-		this.posX += (direccion.x * this.velocidad) * this.dirX;
-		this.posY += (direccion.y * this.velocidad) * this.dirY;*/
-		
-		/*if(this.posX < 60) {
-			this.puntoEncuentroX = app.width - 53;
-		}
+			this.puntoEncuentroX += 0.010f;
+			this.puntoEncuentroY += 0.006f;
+			/*
+			 * this.direccion = new PVector(this.puntoEncuentroX - this.posX,
+			 * this.puntoEncuentroY - this.posY); this.direccion.normalize();
+			 */
 
-		if (this.posX > app.width - 60) {
-			this.puntoEncuentroX = 53;
+			this.posX += (direccion.x * this.velocidad); //* (this.velocidad));
+			this.posY += (direccion.y * this.velocidad); //* (this.velocidad));
+			
+		} catch (ArithmeticException e) {
+			e.printStackTrace();
 		}
-		
-		if(this.posY < 60) {
-			this.puntoEncuentroY = app.height - 53;
-		}
-		
-		if(this.posY > app.height - 60) {
-			this.puntoEncuentroY = 53;
-		}*/
-		/*
-		 * if (this.posX >= 1000 - 53 || this.posX <= 0 + 53) { this.dirX *= -1; }
-		 * 
-		 * if (this.posY >= 600 - 53 || this.posY <= 112 + 53) { this.dirY *= -1; }
-		 */
 
 	}
 

@@ -19,21 +19,19 @@ public class ListaAnimal {
 	}
 
 	public void agregarAnimal(String tipo, String estado, int edad, String sexo, int velocidad) {
-		float conejoX = (int) app.random(100, 900);
-		float conejoY = (int) app.random(200, 500);
+		float genX = (int) app.random(50, 950);
+		float genY = (int) app.random(50, 550);
 
 		if (tipo.equals("conejo")) {
-			conejos.add(new Conejo(tipo, conejoX, conejoY, 53, 53, estado, edad, sexo, velocidad, false, app));
+			conejos.add(new Conejo(tipo, genX, genY, 53, 53, estado, edad, sexo, velocidad, false, app));
 		}
 
 		if (tipo.equals("zorro")) {
-			zorros.add(new Zorro(tipo, (int) app.random(100, 900), (int) app.random(200, 500), 77, 53, estado, edad,
-					sexo, velocidad, false, app));
+			zorros.add(new Zorro(tipo, genX, genY, 77, 53, estado, edad, sexo, velocidad, false, app));
 		}
 
 		if (tipo.equals("buitre")) {
-			buitres.add(new Buitre(tipo, (int) app.random(100, 900), (int) app.random(200, 500), 78, 67, estado, edad,
-					sexo, velocidad, false, app));
+			buitres.add(new Buitre(tipo, genX, genY, 78, 67, estado, edad, sexo, velocidad, false, app));
 		}
 
 	}
