@@ -3,6 +3,7 @@ package modelo;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
+import processing.core.PVector;
 
 public class Animal {
 	protected String tipo;
@@ -19,6 +20,8 @@ public class Animal {
 	protected int dirX;
 	protected int dirY;
 	protected ListaAnimal lista;
+	protected PVector direccion;
+	protected boolean estaVivo;
 
 	public Animal(String tipo, float posX, float posY, float ancho, float alto, String estado, int edad, String sexo,
 			int velocidad, boolean encuentro, PApplet app) {
@@ -36,6 +39,8 @@ public class Animal {
 		this.dirY = 1;
 		this.app = app;
 		this.lista = new ListaAnimal(app);
+		this.estaVivo = true;
+		this.encuentro = false;
 
 	}
 
@@ -155,5 +160,5 @@ public class Animal {
 	public void setLista(ListaAnimal lista) {
 		this.lista = lista;
 	}
-	
+
 }

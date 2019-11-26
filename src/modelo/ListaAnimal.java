@@ -19,8 +19,8 @@ public class ListaAnimal {
 	}
 
 	public void agregarAnimal(String tipo, String estado, int edad, String sexo, int velocidad) {
-		float genX = (int) app.random(50, 950);
-		float genY = (int) app.random(50, 550);
+		float genX = (int) app.random(100, 800);
+		float genY = (int) app.random(100, 500);
 
 		if (tipo.equals("conejo")) {
 			conejos.add(new Conejo(tipo, genX, genY, 53, 53, estado, edad, sexo, velocidad, false, app));
@@ -38,7 +38,6 @@ public class ListaAnimal {
 
 	public void imprimirLista() {
 		System.out.println(conejos.size() + " " + zorros.size() + " " + buitres.size());
-
 	}
 
 	public ArrayList<Conejo> getConejos() {

@@ -20,14 +20,23 @@ public class Ejecutable extends PApplet {
 		logica = new Logica(this);
 
 	}
-	
+
 	public void draw() {
 		logica.pintarPantallas();
-		
+		logica.comerOrganismo();
+		logica.matarOrganismo();
+
 	}
-	
+
 	public void mousePressed() {
-		logica.clicksMouse();
+		if (dist(70.758f, 55.282f, mouseX, mouseY) < (55 / 2) && logica.isValidarPausa()==false) {
+			logica.pausarSimulacion();
+			logica.setValidarPausa(true);
+		} else if (dist(70.758f, 55.282f, mouseX, mouseY) < (55 / 2) && logica.isValidarPausa()==true){
+			logica.reanudarSimulacion();
+			logica.setValidarPausa(false);
+		}
 		
 	}
+
 }
