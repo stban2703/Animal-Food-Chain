@@ -161,4 +161,12 @@ public class Animal {
 		this.lista = lista;
 	}
 
+	public boolean isEstaVivo() {
+		return estaVivo;
+	}
+
+	public void setEstaVivo(boolean estaVivo) {
+		this.estaVivo = estaVivo;
+	}
+
 }

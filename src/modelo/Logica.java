@@ -66,7 +66,6 @@ public class Logica {
 				lista.getConejos().get(i).pintar(this.imagenConejo);
 			}
 
-			
 			/*
 			 * for (int i = 0; i < lista.getConejos().size() - 1; i++) { float conejoX =
 			 * lista.getConejos().get(i).getPosX(); float conejoY =
@@ -107,12 +106,11 @@ public class Logica {
 			for (int i = 0; i < lista.getBuitres().size(); i++) {
 				lista.getBuitres().get(i).pintar(this.imagenBuitre);
 			}
-			
+
 			if (this.validarPausa == true) {
-				app.image(imagenPausa, app.width/2, app.height/2);
+				app.image(imagenPausa, app.width / 2, app.height / 2);
 				app.image(imagenReanudar, 70.758f, 55.282f);
 			}
-
 
 			break;
 		case 2:
@@ -135,10 +133,32 @@ public class Logica {
 				float zorroX = this.lista.getZorros().get(j).getPosX();
 				float zorroY = this.lista.getZorros().get(j).getPosY();
 
-				if (PApplet.dist(zorroX, zorroY, conejoX, conejoY) < 53) {
+				if (PApplet.dist(zorroX, zorroY, conejoX, conejoY) < (53 / 2)) {
 					try {
+						this.lista.getConejos().get(i).setEstaVivo(false);
 						this.lista.getConejos().get(i).setEstado("muerto");
 						this.lista.getConejos().remove(i);
+
+					} catch (IndexOutOfBoundsException e) {
+						e.printStackTrace();
+					}
+
+				}
+
+			}
+
+		}
+		
+		for (int i = 0; i < this.lista.getBuitres().size(); i++) {
+			for (int j = 0; j < this.lista.getZorros().size(); j++) {
+				float buitreX = this.lista.getBuitres().get(i).getPosX();
+				float buitreY = this.lista.getBuitres().get(i).getPosY();
+				float zorroX = this.lista.getZorros().get(j).getPosX();
+				float zorroY = this.lista.getZorros().get(j).getPosY();
+
+				if (PApplet.dist(buitreX, buitreY, zorroX, zorroY) < (78 / 2) && this.lista.getZorros().get(j).getEstado().equals("muerto")) {
+					try {
+						this.lista.getZorros().remove(i);
 
 					} catch (IndexOutOfBoundsException e) {
 						e.printStackTrace();
@@ -153,7 +173,7 @@ public class Logica {
 	}
 
 	public void matarOrganismo() {
-		for (int j = 0; j < this.lista.getZorros().size()-1; j++) {
+		for (int j = 0; j < this.lista.getZorros().size() - 1; j++) {
 			Zorro zorroUno = this.lista.getZorros().get(j);
 			Zorro zorroDos = this.lista.getZorros().get(j + 1);
 			float zorroUnoX = this.lista.getZorros().get(j).getPosX();
@@ -161,11 +181,17 @@ public class Logica {
 			float zorroDosX = this.lista.getZorros().get(j + 1).getPosX();
 			float zorroDosY = this.lista.getZorros().get(j + 1).getPosY();
 
-			if (PApplet.dist(zorroUnoX, zorroUnoY, zorroDosX, zorroDosY) < 77 && zorroUno.getSexo().equals(zorroDos.getSexo())) {
+			if (PApplet.dist(zorroUnoX, zorroUnoY, zorroDosX, zorroDosY) < (77 / 2)
+					&& zorroUno.getSexo().equals(zorroDos.getSexo()) && zorroUno.getEstado().equals("vivo")
+					&& zorroDos.getEstado().equals("vivo")) {
 				zorroDos.setEstado("muerto");
-			} /*else if (PApplet.dist(zorroUnoX, zorroUnoY, zorroDosX, zorroDosY) < 77 && zorroUno.isEncuentro() == false) {
-				
-			}*/
+				zorroDos.setEstaVivo(false);
+			} /*
+				 * else if (PApplet.dist(zorroUnoX, zorroUnoY, zorroDosX, zorroDosY) < 77 &&
+				 * zorroUno.isEncuentro() == false) {
+				 * 
+				 * }
+				 */
 
 		}
 	}
@@ -179,6 +205,10 @@ public class Logica {
 		for (int i = 0; i < lista.getZorros().size(); i++) {
 			lista.getZorros().get(i).setEstado("pausa");
 		}
+		
+		for (int i = 0; i < lista.getBuitres().size(); i++) {
+			lista.getBuitres().get(i).setEstado("pausa");
+		}
 
 	}
 
@@ -190,6 +220,10 @@ public class Logica {
 
 		for (int i = 0; i < lista.getZorros().size(); i++) {
 			lista.getZorros().get(i).setEstado("vivo");
+		}
+		
+		for (int i = 0; i < lista.getBuitres().size(); i++) {
+			lista.getBuitres().get(i).setEstado("vivo");
 		}
 
 	}

@@ -10,15 +10,11 @@ public class Zorro extends Animal implements Runnable {
 
 		new Thread(this).start();
 
-		if (this.estado.equals("muerto")) {
-			this.estaVivo = false;
-		}
-
 	}
 
 	public void run() {
 		while (this.estaVivo == true) {
-			
+
 			if (this.estado.equals("vivo")) {
 				mover();
 			}
@@ -45,8 +41,24 @@ public class Zorro extends Animal implements Runnable {
 		 * this.dirY *= -1; }
 		 */
 
-		posX += app.random(-1, 1);
-		posY += app.random(-1, 1);
+		this.posX += app.random(-1, 1) * this.velocidad;
+		this.posY += app.random(-1, 1) * this.velocidad;
+
+		if (this.posX > app.width) {
+			this.posX = app.width - 77;
+		}
+
+		if (this.posX < 0) {
+			this.posX = 77;
+		}
+
+		if (this.posY > app.height) {
+			this.posY = app.height - 77;
+		}
+
+		if (this.posY < 0) {
+			this.posY = 77;
+		}
 
 	}
 
