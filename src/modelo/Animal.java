@@ -49,6 +49,10 @@ public class Animal {
 		app.image(imagen, this.posX, this.posY, this.ancho, this.alto);
 	}
 
+	public void crecer() {
+			this.edad++;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}

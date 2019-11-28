@@ -23,20 +23,29 @@ public class Ejecutable extends PApplet {
 
 	public void draw() {
 		logica.pintarPantallas();
-		logica.comerOrganismo();
-		logica.matarOrganismo();
+		//logica.comerOrganismo();
+		//logica.matarOrganismo();
+		//logica.reproducirOrganismo();
 
 	}
 
 	public void mousePressed() {
-		if (dist(70.758f, 55.282f, mouseX, mouseY) < (55 / 2) && logica.isValidarPausa()==false) {
+		if (dist(70.758f, 55.282f, mouseX, mouseY) < (55 / 2) && logica.isValidarPausa() == false) {
 			logica.pausarSimulacion();
 			logica.setValidarPausa(true);
-		} else if (dist(70.758f, 55.282f, mouseX, mouseY) < (55 / 2) && logica.isValidarPausa()==true){
+		} else if (dist(70.758f, 55.282f, mouseX, mouseY) < (55 / 2) && logica.isValidarPausa() == true) {
 			logica.reanudarSimulacion();
 			logica.setValidarPausa(false);
 		}
-		
+
+		if (dist(150.626f, 55.282f, mouseX, mouseY) < (55 / 2)) {
+			logica.reiniciarSimulacion();
+		}
+
+		if (mouseX > 493.567 - 100 && mouseX < 493.567 + 100 && mouseY > 403.759 - 40 && mouseY < 403.759 + 40) {
+			logica.comenzarSimulacion();
+		}
+
 	}
 
 }

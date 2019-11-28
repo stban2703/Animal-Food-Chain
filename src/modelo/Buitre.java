@@ -30,34 +30,23 @@ public class Buitre extends Animal implements Runnable {
 	}
 
 	public void mover() {
-		/*
-		 * this.posX += this.velocidad * this.dirX; this.posY += this.velocidad *
-		 * this.dirY;
-		 * 
-		 * if (this.posX >= app.width - this.ancho || this.posX <= 0 + this.ancho) {
-		 * this.dirX *= -1; }
-		 * 
-		 * if (this.posY >= app.height - this.alto || this.posY <= 0 + this.alto) {
-		 * this.dirY *= -1; }
-		 */
-
 		this.posX += app.random(-1, 1) * this.velocidad;
 		this.posY += app.random(-1, 1) * this.velocidad;
 
 		if (this.posX > app.width) {
-			this.posX = app.width - 77;
+			this.posX = app.width - 78;
 		}
 
 		if (this.posX < 0) {
-			this.posX = 77;
+			this.posX = 78;
 		}
 
 		if (this.posY > app.height) {
-			this.posY = app.height - 77;
+			this.posY = app.height - 78;
 		}
 
 		if (this.posY < 0) {
-			this.posY = 77;
+			this.posY = 78;
 		}
 
 	}

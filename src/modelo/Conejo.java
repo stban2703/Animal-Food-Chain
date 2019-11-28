@@ -5,17 +5,11 @@ import processing.core.PVector;
 
 public class Conejo extends Animal implements Runnable {
 
-	private float puntoEncuentroX;
-	private float puntoEncuentroY;
-
 	public Conejo(String tipo, float posX, float posY, float ancho, float alto, String estado, int edad, String sexo,
 			int velocidad, boolean encuentro, PApplet app) {
 		super(tipo, posX, posY, ancho, alto, estado, edad, sexo, velocidad, encuentro, app);
 
 		new Thread(this).start();
-		
-		this.puntoEncuentroX = 1;
-		this.puntoEncuentroY = 1;
 
 	}
 
@@ -37,22 +31,28 @@ public class Conejo extends Animal implements Runnable {
 	}
 
 	public void mover() {
+		this.direccion = new PVector((int) app.random(0, app.width) - this.posX,
+				(int) app.random(0, app.height) - this.posY);
+		this.direccion.normalize();
 
-		/*
-		 * try { this.direccion = new PVector((app.noise(this.puntoEncuentroX) *
-		 * app.width) - this.posX, (app.noise(this.puntoEncuentroY) * app.height) -
-		 * this.posY); this.direccion.normalize();
-		 * 
-		 * this.puntoEncuentroX += 0.010f; this.puntoEncuentroY += 0.006f; /*
-		 * this.direccion = new PVector(this.puntoEncuentroX - this.posX,
-		 * this.puntoEncuentroY - this.posY); this.direccion.normalize();
-		 *
-		 * 
-		 * this.posX += (direccion.x * this.velocidad); // * (this.velocidad));
-		 * this.posY += (direccion.y * this.velocidad); // * (this.velocidad));
-		 * 
-		 * } catch (ArithmeticException e) { e.printStackTrace(); }
-		 */
+		this.posX += (direccion.x * this.velocidad);
+		this.posY += (direccion.y * this.velocidad);
+
+		if (this.posX > app.width) {
+			this.posX = app.width - 53;
+		}
+
+		if (this.posX < 0) {
+			this.posX = 53;
+		}
+
+		if (this.posY > app.height) {
+			this.posY = app.height - 53;
+		}
+
+		if (this.posY < 0) {
+			this.posY = 53;
+		}
 
 	}
 
