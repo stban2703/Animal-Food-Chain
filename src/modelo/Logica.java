@@ -113,11 +113,11 @@ public class Logica {
 			if (contadorTiempo.getContador() == 10) {
 				pantalla = 2;
 			}
-			
+
 			comerOrganismo();
 			matarOrganismo();
 			reproducirOrganismo();
-			
+
 			break;
 		case 2:
 			app.imageMode(PConstants.CORNER);
@@ -356,55 +356,56 @@ public class Logica {
 	}
 
 	public void pausarSimulacion() {
+		if (pantalla == 1) {
+			for (int i = 0; i < lista.getConejos().size(); i++) {
+				lista.getConejos().get(i).setEstado("pausa");
+			}
 
-		for (int i = 0; i < lista.getConejos().size(); i++) {
-			lista.getConejos().get(i).setEstado("pausa");
-		}
+			for (int i = 0; i < lista.getZorros().size(); i++) {
+				lista.getZorros().get(i).setEstado("pausa");
+			}
 
-		for (int i = 0; i < lista.getZorros().size(); i++) {
-			lista.getZorros().get(i).setEstado("pausa");
-		}
-
-		for (int i = 0; i < lista.getBuitres().size(); i++) {
-			lista.getBuitres().get(i).setEstado("pausa");
+			for (int i = 0; i < lista.getBuitres().size(); i++) {
+				lista.getBuitres().get(i).setEstado("pausa");
+			}
 		}
 
 	}
 
 	public void reanudarSimulacion() {
-		for (int i = 0; i < lista.getConejos().size(); i++) {
-			lista.getConejos().get(i).setEstado("vivo");
-		}
+		if (pantalla == 1) {
+			for (int i = 0; i < lista.getConejos().size(); i++) {
+				lista.getConejos().get(i).setEstado("vivo");
+			}
 
-		for (int i = 0; i < lista.getZorros().size(); i++) {
-			lista.getZorros().get(i).setEstado("vivo");
-		}
+			for (int i = 0; i < lista.getZorros().size(); i++) {
+				lista.getZorros().get(i).setEstado("vivo");
+			}
 
-		for (int i = 0; i < lista.getBuitres().size(); i++) {
-			lista.getBuitres().get(i).setEstado("vivo");
+			for (int i = 0; i < lista.getBuitres().size(); i++) {
+				lista.getBuitres().get(i).setEstado("vivo");
+			}
 		}
 
 	}
 
 	public void reiniciarSimulacion() {
-		
-		/*switch(pantalla) {
-		case 0: 
-		}*/
+		if (pantalla == 1) {
 
-		lista.getConejos().clear();
+			lista.getConejos().clear();
 
-		lista.getZorros().clear();
+			lista.getZorros().clear();
 
-		lista.getBuitres().clear();
+			lista.getBuitres().clear();
 
-		validarPausa = false;
+			validarPausa = false;
 
-		cargarOrganismo();
+			cargarOrganismo();
 
-		contadorTiempo.setContador(0);
+			contadorTiempo.setContador(0);
 
-		pantalla = 0;
+			pantalla = 0;
+		}
 	}
 
 	public boolean isValidarPausa() {
@@ -416,7 +417,9 @@ public class Logica {
 	}
 
 	public void comenzarSimulacion() {
-		pantalla = 1;
+		if (pantalla == 0) {
+			pantalla = 1;
+		}
 
 	}
 
